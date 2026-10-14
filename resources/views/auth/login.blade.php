@@ -100,14 +100,14 @@
                 >
                     Login
                 </button>
-            </form>
 
-            <a
+                 <a
                 href="{{ url('/register') }}"
                 class="text-[15px] text-[#6B4FDE] underline underline-offset-2 hover:opacity-80 lg:text-[#B0CBE6]"
             >
                 Belum punya akun?
             </a>
+            </form>
         </div>
     </main>
 
