@@ -1,113 +1,115 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-zinc-100">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk - Sistem PBJ Kampus</title>
+    <title>Login</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-full flex flex-col justify-center py-10 sm:px-6 lg:px-8 bg-zinc-100 text-zinc-900">
-    <div class="sm:mx-auto sm:w-full sm:max-w-2xl text-center px-4">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-zinc-900 text-white font-black text-2xl mb-4 shadow-sm">
-            PBJ
+<body class="bg-white">
+
+    <main class="relative isolate flex min-h-dvh w-full flex-col overflow-hidden bg-white lg:flex-row">
+        <!-- Background Image (Fokus pas seperti di Figma) -->
+        <img
+            src="https://api.builder.io/api/v1/image/assets/TEMP/181e03f2a5d2c4f4731f84960a3cc82d52cb538e?width=2466"
+            alt="Background"
+            class="absolute inset-y-0 left-0 -z-30 h-full w-full object-cover object-[15%_bottom] lg:w-[60%]"
+        />
+
+        <!-- Overlay Gradients (Disesuaikan agar tidak menutupi gambar secara berlebihan) -->
+        <div class="absolute inset-0 -z-20 bg-[linear-gradient(215deg,rgba(255,255,255,0.4)_0%,rgba(155,192,218,0)_60%)] lg:right-auto lg:w-[50%]"></div>
+        <div class="absolute inset-0 -z-10 bg-[linear-gradient(192deg,#B0CBE6_28%,#1E3156_78%)] opacity-90 lg:hidden"></div>
+        <div class="absolute -right-[30%] -top-[55%] -z-10 hidden h-[210%] w-[85%] rounded-[50%] bg-[linear-gradient(192deg,#B0CBE6_28%,#1E3156_78%)] lg:block"></div>
+
+        <!-- Form Container -->
+        <div class="flex flex-1 flex-col items-center justify-center gap-6 px-4 py-10 lg:ml-[55%] lg:w-[45%] lg:flex-none lg:px-6">
+            <h1 class="relative text-[clamp(64px,12vw,128px)] leading-none text-[#B3E0FF] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)]">
+                Login
+            </h1>
+
+            <form
+                action="{{ route('login') }}"
+                method="POST"
+                class="flex w-full max-w-[564px] flex-col items-center gap-[31px] rounded-[37px] bg-[#B0CBE6] px-6 pb-12 pt-[50px] shadow-[0_10px_4px_0_rgba(0,0,0,0.25)] sm:px-[72px] sm:pb-[72px]"
+            >
+                @csrf
+
+                <h2 class="text-center text-[28px] font-normal text-[#6B4FDE] sm:text-[32px]">
+                    Log In To Continue
+                </h2>
+
+                <!-- Input NIP / Email -->
+                <label class="flex h-[66px] w-full max-w-[419px] items-center gap-2.5 rounded-full bg-white px-[23px] focus-within:ring-2 focus-within:ring-[#6B4FDE]">
+                    <svg
+                        class="shrink-0"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M9.175 10.825C8.39167 10.0417 8 9.1 8 8C8 6.9 8.39167 5.95833 9.175 5.175C9.95833 4.39167 10.9 4 12 4C13.1 4 14.0417 4.39167 14.825 5.175C15.6083 5.95833 16 6.9 16 8C16 9.1 15.6083 10.0417 14.825 10.825C14.0417 11.6083 13.1 12 12 12C10.9 12 9.95833 11.6083 9.175 10.825ZM4 20V17.2C4 16.6333 4.146 16.1127 4.438 15.638C4.73 15.1633 5.11733 14.8007 5.6 14.55C6.63333 14.0333 7.68333 13.646 8.75 13.388C9.81667 13.13 10.9 13.0007 12 13C13.1 12.9993 14.1833 13.1287 15.25 13.388C16.3167 13.6473 17.3667 14.0347 18.4 14.55C18.8833 14.8 19.271 15.1627 19.563 15.638C19.855 16.1133 20.0007 16.634 20 17.2V20H4Z"
+                            fill="#9747FF"
+                        />
+                    </svg>
+                    <span class="sr-only">NIP / Email</span>
+                    <input
+                        name="identifier"
+                        type="text"
+                        autocomplete="username"
+                        placeholder="NIP / Email"
+                        value="{{ old('identifier') }}"
+                        required
+                        class="min-w-0 flex-1 bg-transparent text-xl text-[#6B4FDE] outline-none placeholder:text-[#6B4FDE] sm:text-2xl"
+                    />
+                </label>
+
+                <!-- Input Password -->
+                <label class="flex h-[66px] w-full max-w-[419px] items-center gap-2.5 rounded-full bg-white px-[23px] focus-within:ring-2 focus-within:ring-[#6B4FDE]">
+                    <svg
+                        class="shrink-0"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M6 22C5.45 22 4.97933 21.8043 4.588 21.413C4.19667 21.0217 4.00067 20.5507 4 20V10C4 9.45 4.196 8.97933 4.588 8.588C4.98 8.19667 5.45067 8.00067 6 8H7V6C7 4.61667 7.48767 3.43767 8.463 2.463C9.43833 1.48833 10.6173 1.00067 12 1C13.3827 0.999334 14.562 1.487 15.538 2.463C16.514 3.439 17.0013 4.618 17 6V8H18C18.55 8 19.021 8.196 19.413 8.588C19.805 8.98 20.0007 9.45067 20 10V20C20 20.55 19.8043 21.021 19.413 21.413C19.0217 21.805 18.5507 22.0007 18 22H6ZM13.413 16.413C13.8043 16.021 14 15.55 14 15C14 14.45 13.8043 13.9793 13.413 13.588C13.0217 13.1967 12.5507 13.0007 12 13C11.4493 12.9993 10.9787 13.1953 10.588 13.588C10.1973 13.9807 10.0013 14.4513 10 15C9.99867 15.5487 10.1947 16.0197 10.588 16.413C10.9813 16.8063 11.452 17.002 12 17C12.548 16.998 13.019 16.8023 13.413 16.413ZM9 8H15V6C15 5.16667 14.7083 4.45833 14.125 3.875C13.5417 3.29167 12.8333 3 12 3C11.1667 3 10.4583 3.29167 9.875 3.875C9.29167 4.45833 9 5.16667 9 6V8Z"
+                            fill="#9747FF"
+                        />
+                    </svg>
+                    <span class="sr-only">Password</span>
+                    <input
+                        name="password"
+                        type="password"
+                        autocomplete="current-password"
+                        placeholder="Password"
+                        required
+                        class="min-w-0 flex-1 bg-transparent text-xl text-[#6B4FDE] outline-none placeholder:text-[#6B4FDE] sm:text-2xl"
+                    />
+                </label>
+
+                <!-- Tombol Submit -->
+                <button
+                    type="submit"
+                    class="flex h-[43px] w-[135px] items-center justify-center rounded-[20px] bg-[#6B4FDE] text-xl text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                    Login
+                </button>
+            </form>
+
+            <a
+                href="{{ url('/register') }}"
+                class="text-[15px] text-[#6B4FDE] underline underline-offset-2 hover:opacity-80 lg:text-[#B0CBE6]"
+            >
+                Belum punya akun?
+            </a>
         </div>
-        <h2 class="text-3xl font-extrabold text-zinc-900 tracking-tight">Sistem Pengadaan Barang & Jasa</h2>
-        <p class="mt-2 text-base text-zinc-600 font-medium">Portal Terpadu Pengelolaan Pengadaan Kampus Politeknik</p>
-    </div>
+    </main>
 
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-4xl px-4">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            
-            <!-- FORM LOGIN NORMAL -->
-            <div class="md:col-span-6 bg-white py-8 px-6 shadow-sm rounded-xl border border-zinc-300 sm:px-8">
-                <h3 class="text-xl font-bold text-zinc-900 border-b border-zinc-200 pb-3 mb-6">Masuk dengan Akun</h3>
-                
-                @if ($errors->any())
-                    <div class="mb-4 p-3 rounded-lg bg-zinc-900 text-zinc-100 text-sm">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
-
-                <form class="space-y-5" action="{{ route('login.post') }}" method="POST">
-                    @csrf
-                    <div>
-                        <label for="email" class="block text-sm font-bold text-zinc-800 mb-1">Alamat Email</label>
-                        <input id="email" name="email" type="email" autocomplete="email" required value="{{ old('email') }}" 
-                            class="w-full px-4 py-3 rounded-lg border border-zinc-300 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 text-base"
-                            placeholder="nama@kampus.ac.id">
-                    </div>
-
-                    <div>
-                        <label for="password" class="block text-sm font-bold text-zinc-800 mb-1">Kata Sandi</label>
-                        <input id="password" name="password" type="password" autocomplete="current-password" required 
-                            class="w-full px-4 py-3 rounded-lg border border-zinc-300 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 text-base"
-                            placeholder="••••••••">
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input id="remember" name="remember" type="checkbox" class="h-5 w-5 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900">
-                            <label for="remember" class="ml-2 block text-sm text-zinc-700 font-medium">Ingat Saya</label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <button type="submit" class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-base font-bold text-white bg-zinc-900 hover:bg-zinc-800 focus:outline-none cursor-pointer">
-                            Masuk ke Sistem
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- DEMO ROLE SWITCHER (1-KLIK) -->
-            <div class="md:col-span-6 bg-zinc-50 py-8 px-6 shadow-sm rounded-xl border border-zinc-300 sm:px-8">
-                <div class="flex items-center justify-between border-b border-zinc-200 pb-3 mb-4">
-                    <div>
-                        <h3 class="text-xl font-bold text-zinc-900">Demo Cepat (7 Role)</h3>
-                        <p class="text-xs text-zinc-500">Klik salah satu role untuk langsung masuk tanpa sandi</p>
-                    </div>
-                    <span class="bg-zinc-900 text-white text-xs font-bold px-2 py-1 rounded">Prototipe</span>
-                </div>
-
-                <div class="space-y-2.5">
-                    <a href="{{ route('quick-login', 'user') }}" class="block p-3 rounded-lg border border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-xs transition group">
-                        <div class="font-bold text-sm text-zinc-900 group-hover:underline">1. User (Jurusan / Unit Pemohon)</div>
-                        <div class="text-xs text-zinc-500">Dr. Ir. Budi Santoso (Kajur TIK) • Pembuat Surat Permohonan</div>
-                    </a>
-
-                    <a href="{{ route('quick-login', 'wadir2') }}" class="block p-3 rounded-lg border border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-xs transition group">
-                        <div class="font-bold text-sm text-zinc-900 group-hover:underline">2. Wadir 2 (Pimpinan / Kebijakan)</div>
-                        <div class="text-xs text-zinc-500">Prof. Dr. Ahmad Dahlan • Persetujuan Permohonan & Memo Bayar</div>
-                    </a>
-
-                    <a href="{{ route('quick-login', 'perencanaan') }}" class="block p-3 rounded-lg border border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-xs transition group">
-                        <div class="font-bold text-sm text-zinc-900 group-hover:underline">3. Perencanaan (Anggaran & MAK)</div>
-                        <div class="text-xs text-zinc-500">Dra. Siti Aminah • Penetapan Nomor MAK & Pagu Anggaran (SIGAP)</div>
-                    </a>
-
-                    <a href="{{ route('quick-login', 'ppbj') }}" class="block p-3 rounded-lg border border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-xs transition group">
-                        <div class="font-bold text-sm text-zinc-900 group-hover:underline">4. PPBJ (Pengelola Pengadaan)</div>
-                        <div class="text-xs text-zinc-500">Rahmat Hidayat, S.T. • Registrasi, SPK, Vendor, & Terbit SPP</div>
-                    </a>
-
-                    <a href="{{ route('quick-login', 'ppk_pp') }}" class="block p-3 rounded-lg border border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-xs transition group">
-                        <div class="font-bold text-sm text-zinc-900 group-hover:underline">5. PPK / Pejabat Pengadaan</div>
-                        <div class="text-xs text-zinc-500">Ir. Hendra Gunawan • Reviu Dokumen & Persetujuan SPK / Bayar</div>
-                    </a>
-
-                    <a href="{{ route('quick-login', 'perlengkapan') }}" class="block p-3 rounded-lg border border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-xs transition group">
-                        <div class="font-bold text-sm text-zinc-900 group-hover:underline">6. Perlengkapan (BMN & Penerimaan)</div>
-                        <div class="text-xs text-zinc-500">Agus Setiawan, S.Sos. • Terima Barang, Foto & TTD Digital BAST</div>
-                    </a>
-
-                    <a href="{{ route('quick-login', 'keuangan') }}" class="block p-3 rounded-lg border border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-xs transition group">
-                        <div class="font-bold text-sm text-zinc-900 group-hover:underline">7. Keuangan (Pembayaran & Pencairan)</div>
-                        <div class="text-xs text-zinc-500">Maya Indrawati, S.E. • Pencatatan Transaksi & Bukti Transfer Selesai</div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
 </body>
 </html>
